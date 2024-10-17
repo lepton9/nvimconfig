@@ -30,8 +30,8 @@ local plugins = {
         dapui.close()
       end
 
-      vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, {})
-      vim.keymap.set('n', '<leader>dr', dap.continue, {})
+      vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Set a breakpoint' })
+      vim.keymap.set('n', '<leader>dr', dap.continue, { desc = 'Start or continue debugging' })
     end,
   },
 }

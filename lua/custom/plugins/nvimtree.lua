@@ -1,7 +1,6 @@
 local options = {
   filters = {
     dotfiles = false,
-    -- exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
   },
   disable_netrw = true,
   hijack_netrw = true,
@@ -73,22 +72,6 @@ local options = {
     },
   },
 }
-
--- return {
---   'nvim-neo-tree/neo-tree.nvim',
---   branch = 'v3.x',
---   depencies = {
---     'nvim-lua/plenary.nvim',
---     'nvim-tree/nvim-web-devicons',
---     'MunifTanjim/nui.nvim',
---   },
---   config = function()
---     vim.keymap.set('n', '<C-n>', ':Neotree toggle filesystem reveal left <CR>', {})
---
---     local nvimtree = require("nvim-tree")
---     nvimtree.setup(options)
---   end,
--- }
 
 return {
   'nvim-tree/nvim-tree.lua',
