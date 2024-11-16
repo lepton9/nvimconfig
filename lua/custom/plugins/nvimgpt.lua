@@ -9,7 +9,6 @@ return {
   config = function()
     require('chatgpt').setup {
       api_key_cmd = 'echo $OPENAI_API_KEY',
-      -- api_key_cmd = 'cat /home/lepton/dev/api/openaiAPI.txt',
     }
   end,
 }

@@ -2,11 +2,24 @@ return {
 
   { -- Linting
     'mfussenegger/nvim-lint',
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPre', 'BufNewFile', 'VeryLazy' },
+    dependencies = {
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+    },
     config = function()
+      require('mason-tool-installer').setup {
+        automatic_installation = true,
+        handlers = {},
+        ensure_installed = {
+          'markdownlint',
+          'markdownlint-cli2',
+          'markdown-toc',
+        },
+      }
+
       local lint = require 'lint'
       lint.linters_by_ft = {
-        markdown = { 'markdownlint' },
+        -- markdown = { 'markdownlint-cli2' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
@@ -48,6 +61,17 @@ return {
         group = lint_augroup,
         callback = function()
           require('lint').try_lint()
+        end,
+      })
+
+      local markdown_augroup = vim.api.nvim_create_augroup('Markdown', { clear = true })
+      vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+        group = markdown_augroup,
+        pattern = { '*.md' },
+        callback = function(opts)
+          bufnr = opts['buf']
+          vim.bo.textwidth = 80
+          vim.bo.formatoptions = 'tcqawjp]'
         end,
       })
     end,

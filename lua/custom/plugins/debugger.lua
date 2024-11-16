@@ -5,6 +5,7 @@ local plugins = {
     event = 'VeryLazy',
     dependencies = {
       'williamboman/mason.nvim',
+      'jay-babu/mason-nvim-dap.nvim',
       'mfussenegger/nvim-dap',
       'rcarriga/nvim-dap-ui',
       'nvim-neotest/nvim-nio',
@@ -19,6 +20,16 @@ local plugins = {
       local dap = require 'dap'
       local dapui = require 'dapui'
 
+      require('mason-nvim-dap').setup {
+        automatic_installation = true,
+        handlers = {},
+        ensure_installed = {
+          'delve',
+          'gdb',
+          'codelldb',
+        },
+      }
+
       dapui.setup()
       dap.listeners.after.event_initialized['dapui_config'] = function()
         dapui.open()
@@ -30,6 +41,9 @@ local plugins = {
         dapui.close()
       end
 
+      vim.keymap.set('n', '<leader>B', function()
+        dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
+      end, { desc = 'Debug: Set Breakpoint' })
       vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Set a breakpoint' })
       vim.keymap.set('n', '<leader>dr', dap.continue, { desc = 'Start or continue debugging' })
     end,
