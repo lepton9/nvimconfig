@@ -6,4 +6,8 @@ return {
   ---@module 'render-markdown'
   ---@type render.md.UserConfig
   opts = {},
+
+  config = function()
+    vim.keymap.set('n', '<leader>md', ':RenderMarkdown toggle<CR>', { desc = 'Toggle markdown rendering' })
+  end,
 }
