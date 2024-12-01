@@ -7,6 +7,9 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
+vim.keymap.set('i', 'kj', '<Esc>')
+vim.keymap.set('i', 'jk', '<Esc>')
+
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 --  For more options `:help option-list`
